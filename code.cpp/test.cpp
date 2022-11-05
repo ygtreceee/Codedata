@@ -8,6 +8,193 @@
 using namespace std;
 
 
+//1 2 3 4 5 6 7 8 9 10
+//4
+//1 2
+//0
+//even n/2 - 1
+//1 2 3 4 5
+//2
+//odd  n/2
+//odd 
+
+int main()
+{
+    int n;
+    cin >> n;
+    if(n % 2 == 0)  cout << n / 2 - 1;
+    else cout << n / 2;
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#if 0
+//智力大冲浪
+struct str
+{
+    int time;
+    int money;
+}game[600];
+
+bool cmp(str a, str b)
+{
+    return a.money > b.money;
+}
+int main()
+{
+    int m, n, sum = 0, save = 0;
+    cin >> m >> n;
+    for(int i = 1; i <= n; i++)  cin >> game[i].time;
+    for(int i = 1; i <= n; i++)  cin >> game[i].money;
+    int lib[600] = {0};
+    sort(game + 1, game + n + 1, cmp);
+    for(int i = 1; i <= n; i++)
+    {
+        for(int j = game[i].time; j >= 0; j--)
+        {
+            if(lib[j] == 0) 
+            {
+                lib[j] = game[i].money;
+                break;
+            }
+        }
+    }
+    for(int i = 1; i <= n; i++)
+    {
+        save += lib[i];
+        sum  += game[i].money;
+        if(i == n)  m -= sum - save; 
+    }
+    cout << m << endl;
+    return 0;
+}
+
+//数组
+struct str
+{
+    int b;
+    int e;
+}line[1000000];
+
+bool cmp(str a, str b)
+{
+    return a.e < b.e;
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    for(int i = 0; i < n; i++)  cin >> line[i].b >> line[i].e;
+    sort(line, line + n, cmp);
+    int cnt = 0, endline = 0;
+    for(int i = 0; i < n; i++)
+    {
+        if(line[i].b >= endline)
+        {
+            cnt++;
+            endline = line[i].e;
+        }
+    }
+    cout << cnt;
+    return 0;
+}
+
+//田忌赛马
+void my_arrcpy(int des[], int src[])
+{
+    for(int i = 0; src[i] != 0; i++)    des[i] = src[i];
+}
+int Race(int c[1010], int s[1010], int n, int flag)
+{
+    int p[1010], q[1010];
+    int sscore = 0, cscore = 0;
+    my_arrcpy(p, c);
+    my_arrcpy(q, s);
+        for(int i = 0; i < n; i++)
+        {
+            for(int j = 0; j < n; j++)
+            {
+                if(q[j] >= p[i])
+                {
+                    if(q[j] == p[i])    
+                    {
+                        sscore += 2;
+                        cscore += 2;
+                    }
+                    else if(q[j] > p[i])
+                    {
+                        sscore += 3;
+                        cscore += 1;
+                    }
+                    q[j] = 0; p[i] = 0;
+                    break;
+                }
+                else if(j == n - 1 && q[j] < p[i])
+                {
+                    sscore += n - i;
+                    cscore += (n - i) * 3;
+                    i = n;
+                }
+            }
+        }
+    if(!flag)   return sscore;
+    else    return cscore; 
+}
+bool cmp(int a, int b)
+{
+    return a < b;
+}
+int main()
+{
+    int n, flag = 0;
+    int c[1010], s[1010];
+    while(scanf("%d", &n) && n != 0)
+    {
+        flag = 0;
+        int max = 0, min = 0;
+        memset(c, 0, 1010);
+        memset(s, 0, 1010);
+        for(int i = 0; i < n; i++)  cin >> c[i];
+        for(int i = 0; i < n; i++)  cin >> s[i];
+        sort(c, c + n, cmp);
+        sort(s, s + n, cmp);
+        max = Race(c, s, n, flag++);
+        min = Race(s, c, n, flag);
+        cout << max << ' ' << min << endl;
+    }
+    return 0;
+}
+
+//最大整数
 int main()
 {
     int t;
@@ -35,7 +222,7 @@ int main()
     return 0;
 }
 
-#if 0
+
 //电池的寿命
 bool comparision(int a, int b)
 {
@@ -62,6 +249,7 @@ int main()
     }
     return 0;
 }
+
 
 //种树
 struct str
