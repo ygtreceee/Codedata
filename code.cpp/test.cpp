@@ -1,17 +1,21 @@
 #include <iostream>
 #include <cstdio>
-#include <vector>
-#include <iomanip>
 #include <cstring>
 #include <algorithm>
 #include <cmath>
 using namespace std;
 
-
+void test(int *ap, int *bp)
+{
+    *ap += 1;
+    *bp += 2;
+}
 int main()
 {
-    char a = '9';
-    cout << a << endl;
+    int a = 1, b = 2;
+    int *ap = &a, *bp = &b;
+    test(ap, bp);
     return 0;
 }
+
 
